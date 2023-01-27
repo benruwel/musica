@@ -12,7 +12,7 @@ type Configuration struct {
 var Config *Configuration
 
 func InitConfig() error {
-	viper.AddConfigPath("../")
+	viper.AddConfigPath("./")
 	error := viper.ReadInConfig() // Find and read the config file
 
 	Config = &Configuration{

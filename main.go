@@ -4,8 +4,8 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
-	"musica.com/albums"
-	"musica.com/utils"
+	"musica.com/app/albums"
+	"musica.com/app/utils"
 )
 
 func main() {

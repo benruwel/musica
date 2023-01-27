@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v5"
-	"musica.com/utils"
+	"musica.com/app/utils"
 )
 
 type Album struct {
