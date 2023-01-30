@@ -5,6 +5,7 @@ import (
 )
 
 type Configuration struct {
+	Host        string
 	Port        string
 	DatabaseURL string
 }
@@ -12,13 +13,31 @@ type Configuration struct {
 var Config *Configuration
 
 func InitConfig() error {
-	viper.AddConfigPath("./")
-	error := viper.ReadInConfig() // Find and read the config file
+	viper.AddConfigPath(".") // optionally look for config in the working directory
+	viper.SetConfigType("env")
 
-	Config = &Configuration{
-		Port:        viper.GetString("http.port"),
-		DatabaseURL: viper.GetString("db.url"),
+	if err := viper.ReadInConfig(); err != nil {
+		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+			// Config file not found; ignore error if desired
+			viper.AutomaticEnv()
+
+			Config = &Configuration{
+				Host:        viper.GetString("HOST"),
+				Port:        viper.GetString("PORT"),
+				DatabaseURL: viper.GetString("DATABASE_URL"),
+			}
+			return nil
+		}
+		//  else , Config file was found but another error was produced
+
 	}
 
-	return error
+	// Config file found and successfully parsed
+
+	Config = &Configuration{
+		Host:        viper.GetString("HOST"),
+		Port:        viper.GetString("PORT"),
+		DatabaseURL: viper.GetString("DATABASE_URL"),
+	}
+	return nil
 }

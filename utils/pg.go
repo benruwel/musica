@@ -2,7 +2,6 @@ package utils
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/jackc/pgx/v5"
 )
@@ -13,9 +12,8 @@ var dbCtx = context.Background()
 
 func InitDBSession() error {
 	var err error
-	Conn, err = pgx.Connect(dbCtx, Config.DatabaseURL)
+	Conn, _ = pgx.Connect(dbCtx, Config.DatabaseURL)
 
-	err = Conn.Ping(context.Background())
-	fmt.Println("pg connected and pinged!")
+	err = Conn.Ping(dbCtx)
 	return err
 }

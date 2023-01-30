@@ -1,4 +1,0 @@
-http:
-  port: 8080
-db:
-  url: "postgres://postgres:admin@localhost:5432/recordings"

@@ -9,17 +9,15 @@ import (
 )
 
 func main() {
-
 	// initialize config
-	error := utils.InitConfig()
-	if error != nil {
-		log.Fatal(error)
+	err := utils.InitConfig()
+	if err != nil {
+		log.Fatal("Config Error", err)
 	}
-
 	// initialize db connection
-	error = utils.InitDBSession()
-	if error != nil {
-		log.Fatal(error)
+	err = utils.InitDBSession()
+	if err != nil {
+		log.Fatal("DB Error", err)
 	}
 
 	// initialize gin router
