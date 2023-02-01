@@ -1,19 +1,27 @@
 
 CREATE DATABASE recordings;
 
+DROP TABLE IF EXISTS public.artists;
+CREATE TABLE public.artists 
+(
+    id            VARCHAR(50)     PRIMARY KEY,
+    name          VARCHAR(128)    NOT NULL,
+    country_code  VARCHAR(4)      NOT NULL,
+    profile_image VARCHAR(255),
+    updated_at    TIMESTAMP       NOT NULL,
+    created_at    TIMESTAMP       NOT NULL
+);
+
 DROP TABLE IF EXISTS public.albums;
 CREATE TABLE public.albums 
 (
-    id          VARCHAR(50)     PRIMARY KEY,
+    id          VARCHAR(50),
     title       VARCHAR(128)    NOT NULL,
-    artist      VARCHAR(255)    NOT NULL,
-    price       NUMERIC(5,2)    NOT NULL
+    artist_id   VARCHAR(50)     NOT NULL,
+    price       NUMERIC(5,2)    NOT NULL,
+    album_art   VARCHAR(255),
+    updated_at  TIMESTAMP       NOT NULL,
+    created_at  TIMESTAMP       NOT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_artist FOREIGN KEY (artist_id) REFERENCES artists (id)
 );
-
-INSERT INTO albums
-  (id, title, artist, price)
-VALUES
-  ('1', 'Blue Train', 'John Coltrane', 56.99),
-  ('2', 'Giant Steps', 'John Coltrane', 63.99),
-  ('3', 'Jeru', 'Gerry Mulligan', 17.99),
-  ('4', 'Sarah Vaughan', 'Sarah Vaughan', 34.98);

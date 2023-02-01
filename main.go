@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"musica.com/app/albums"
+	"musica.com/app/artists"
 	"musica.com/app/utils"
 )
 
@@ -22,6 +23,9 @@ func main() {
 
 	// initialize gin router
 	router := gin.Default()
+
+	router.POST("/artists", artists.CreateArtist)
+	router.GET("/artists/:id", artists.FindOne)
 
 	router.GET("/albums", albums.ListAlbums)
 	router.GET("/albums/:id", albums.FindOne)

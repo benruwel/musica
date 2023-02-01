@@ -5,9 +5,13 @@ import (
 )
 
 type Configuration struct {
-	Host        string
-	Port        string
-	DatabaseURL string
+	Host       string
+	Port       string
+	DBUser     string
+	DBPassword string
+	DBName     string
+	DBPort     string
+	DBSSLMode  string
 }
 
 var Config *Configuration
@@ -22,9 +26,13 @@ func InitConfig() error {
 			viper.AutomaticEnv()
 
 			Config = &Configuration{
-				Host:        viper.GetString("HOST"),
-				Port:        viper.GetString("PORT"),
-				DatabaseURL: viper.GetString("DATABASE_URL"),
+				Host:       viper.GetString("HOST"),
+				Port:       viper.GetString("PORT"),
+				DBUser:     viper.GetString("DATABASE_USER"),
+				DBPassword: viper.GetString("DATABASE_PASSWORD"),
+				DBName:     viper.GetString("DATABASE_NAME"),
+				DBPort:     viper.GetString("DATABASE_PORT"),
+				DBSSLMode:  viper.GetString("DATABASE_SSLMODE"),
 			}
 			return nil
 		}
@@ -35,9 +43,13 @@ func InitConfig() error {
 	// Config file found and successfully parsed
 
 	Config = &Configuration{
-		Host:        viper.GetString("HOST"),
-		Port:        viper.GetString("PORT"),
-		DatabaseURL: viper.GetString("DATABASE_URL"),
+		Host:       viper.GetString("HOST"),
+		Port:       viper.GetString("PORT"),
+		DBUser:     viper.GetString("DATABASE_USER"),
+		DBPassword: viper.GetString("DATABASE_PASSWORD"),
+		DBName:     viper.GetString("DATABASE_NAME"),
+		DBPort:     viper.GetString("DATABASE_PORT"),
+		DBSSLMode:  viper.GetString("DATABASE_SSLMODE"),
 	}
 	return nil
 }
